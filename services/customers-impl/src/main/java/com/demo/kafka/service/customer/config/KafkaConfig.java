@@ -1,6 +1,6 @@
 package com.demo.kafka.service.customer.config;
 
-import com.demo.kafka.eventbus.EventBus;
+import com.demo.kafka.eventbus.EventBusSender;
 import org.springframework.boot.autoconfigure.kafka.ConcurrentKafkaListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +19,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public EventBus eventBus() {
-        return new EventBus(kafkaTemplate);
+    public EventBusSender eventBus() {
+        return new EventBusSender(kafkaTemplate);
     }
 
     /**

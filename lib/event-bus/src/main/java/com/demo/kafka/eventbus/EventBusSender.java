@@ -9,15 +9,15 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import java.util.Collection;
 
-public final class EventBus {
+public final class EventBusSender {
 
     private final KafkaTemplate kafkaTemplate;
 
     private final ObjectMapper objectMapper;
 
-    public EventBus(final KafkaTemplate kafkaTemplate) {
+    public EventBusSender(final KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = JsonSerializationProvider.objectMapper();
     }
 
     /**
@@ -25,7 +25,10 @@ public final class EventBus {
      */
     public void sendEventImmediate(final Event event) {
         try {
-            kafkaTemplate.send(event.topic(), event.partition(), event.getClass().getSimpleName(), objectMapper.writeValueAsString(event));
+            final ApplicationEvent applicationEvent = new ApplicationEvent(
+                    event.getClass().getName(),
+                    objectMapper.writeValueAsString(event));
+            kafkaTemplate.send(event.topic(), event.partition(), event.getClass().getSimpleName(), objectMapper.writeValueAsString(applicationEvent));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

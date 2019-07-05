@@ -1,7 +1,7 @@
 package com.demo.kafka.account.config;
 
 import com.demo.kafka.accounts.api.event.AccountEvent;
-import com.demo.kafka.eventbus.EventBus;
+import com.demo.kafka.eventbus.EventBusSender;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.boot.autoconfigure.kafka.ConcurrentKafkaListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +28,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public EventBus eventBus() {
-        return new EventBus(kafkaTemplate);
+    public EventBusSender eventBus() {
+        return new EventBusSender(kafkaTemplate);
     }
 
     /**

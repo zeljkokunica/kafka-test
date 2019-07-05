@@ -3,7 +3,7 @@ package com.demo.kafka.account.service;
 import com.demo.kafka.accounts.api.command.AccountCommand;
 import com.demo.kafka.accounts.api.event.AccountEvent;
 import com.demo.kafka.common.Audit;
-import com.demo.kafka.eventbus.EventBus;
+import com.demo.kafka.eventbus.EventBusSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +12,9 @@ import java.util.UUID;
 @Service
 public class AccountCreateService {
 
-    private EventBus eventBus;
+    private EventBusSender eventBus;
 
-    public AccountCreateService(final EventBus eventBus) {
+    public AccountCreateService(final EventBusSender eventBus) {
         this.eventBus = eventBus;
     }
 

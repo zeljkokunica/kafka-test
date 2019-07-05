@@ -1,6 +1,8 @@
 package com.demo.kafka.reports.account.entity;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,34 +10,36 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
 
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "accounts")
 public class AccountJpa {
     @Id
-    private final String id;
+    private String id;
 
     @Column(name = "customer_id")
-    private final String customerId;
+    private String customerId;
 
     @Column(name = "name")
-    private final String name;
+    private String name;
 
     @Column(name = "number")
-    private final String number;
+    private String number;
 
     @Column(name = "reference")
-    private final String reference;
+    private String reference;
 
     @Column(name = "created_at")
-    private final Instant createdAt;
+    private Instant createdAt;
 
     @Column(name = "created_by")
-    private final String createdBy;
+    private String createdBy;
 
     @Column(name = "updated_at")
-    private final Instant updatedAt;
+    private Instant updatedAt;
 
     @Column(name = "updated_by")
-    private final String updatedBy;
+    private String updatedBy;
 }
