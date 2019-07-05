@@ -1,4 +1,4 @@
-package com.demo.kafka.service.account;
+package com.demo.kafka.account;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

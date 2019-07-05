@@ -1,31 +1,56 @@
 package com.demo.kafka.accounts.api.event;
 
+import com.demo.kafka.common.Audit;
+import com.demo.kafka.common.event.Event;
+import com.demo.kafka.common.event.Partitioner;
 import lombok.Value;
 
 import java.math.BigDecimal;
 
-public interface AccountEvent {
+public interface AccountEvent extends Event {
 
-    default Integer partitions() {
-        return 10;
+    int PARTITIONS = 10;
+
+    String TOPIC = "account-events";
+
+    @Override
+    default String topic() {
+        return TOPIC;
     }
 
     @Value
     final class AccountCreated implements AccountEvent {
-        private AccountDetails accountDetails;
+        private final AccountDetails accountDetails;
+        private final Audit audit;
+
+        @Override
+        public Integer partition() {
+            return Partitioner.partition(accountDetails.accountId, PARTITIONS);
+        }
     }
 
     @Value
     final class AccountUpdated implements AccountEvent {
-        private AccountDetails accountDetails;
+        private final AccountDetails accountDetails;
+        private final Audit audit;
+
+        @Override
+        public Integer partition() {
+            return Partitioner.partition(accountDetails.accountId, PARTITIONS);
+        }
     }
 
     @Value
     final class AccountTransactionCreated implements AccountEvent {
-        private AccountDetails accountDetails;
+        private final AccountDetails accountDetails;
         private final BigDecimal amount;
         private final String currencyCode;
         private final String description;
+
+        @Override
+        public Integer partition() {
+            return Partitioner.partition(accountDetails.accountId, PARTITIONS);
+        }
     }
 
     @Value

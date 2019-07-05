@@ -14,6 +14,13 @@
     <artifactId>accounts-api</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.demo.kafka</groupId>
+            <artifactId>common-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
