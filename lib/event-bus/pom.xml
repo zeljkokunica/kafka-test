@@ -13,6 +13,8 @@
 
     <artifactId>event-bus</artifactId>
 
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
