@@ -25,7 +25,7 @@ public interface AccountEvent extends Event {
 
         @Override
         public Integer partition() {
-            return Partitioner.partition(accountDetails.accountId, PARTITIONS);
+            return Partitioner.partition(accountDetails.customerId, PARTITIONS);
         }
     }
 
@@ -36,7 +36,7 @@ public interface AccountEvent extends Event {
 
         @Override
         public Integer partition() {
-            return Partitioner.partition(accountDetails.accountId, PARTITIONS);
+            return Partitioner.partition(accountDetails.customerId, PARTITIONS);
         }
     }
 
@@ -49,7 +49,7 @@ public interface AccountEvent extends Event {
 
         @Override
         public Integer partition() {
-            return Partitioner.partition(accountDetails.accountId, PARTITIONS);
+            return Partitioner.partition(accountDetails.customerId, PARTITIONS);
         }
     }
 

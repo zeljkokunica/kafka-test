@@ -14,4 +14,12 @@ public interface AccountCommand {
         private final String number;
         private final String reference;
     }
+
+    @Value
+    @AllArgsConstructor(onConstructor = @__(@JsonCreator))
+    final class UpdateAccount implements AccountCommand {
+        private final String name;
+        private final String number;
+        private final String reference;
+    }
 }

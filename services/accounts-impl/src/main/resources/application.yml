@@ -2,7 +2,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: reports-service
+      group-id: accounts-service
       auto-offset-reset: earliest
 server:
-  port: 8083
+  port: 8081

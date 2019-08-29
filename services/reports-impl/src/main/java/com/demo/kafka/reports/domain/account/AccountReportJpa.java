@@ -1,4 +1,4 @@
-package com.demo.kafka.reports.account.entity;
+package com.demo.kafka.reports.domain.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.time.Instant;
 @Data
 @Entity
 @Table(name = "accounts")
-public class AccountJpa {
+public class AccountReportJpa {
     @Id
     private String id;
 
