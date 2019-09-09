@@ -10,5 +10,7 @@ public class ApplicationEvent {
 
     private final String eventName;
 
+    private final Long version;
+
     private final String eventContent;
 }

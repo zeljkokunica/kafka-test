@@ -27,6 +27,7 @@ public final class EventBusSender {
         try {
             final ApplicationEvent applicationEvent = new ApplicationEvent(
                     event.getClass().getName(),
+                    event.version(),
                     objectMapper.writeValueAsString(event));
             kafkaTemplate.send(event.topic(), event.partition(), event.getClass().getSimpleName(), objectMapper.writeValueAsString(applicationEvent));
         } catch (JsonProcessingException e) {

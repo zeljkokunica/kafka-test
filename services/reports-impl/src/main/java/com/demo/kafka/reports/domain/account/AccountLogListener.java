@@ -2,9 +2,12 @@ package com.demo.kafka.reports.domain.account;
 
 import com.demo.kafka.accounts.api.event.AccountEvent;
 import com.demo.kafka.eventbus.EventBusListener;
+import com.demo.kafka.eventbus.EventMigration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -14,9 +17,13 @@ public class AccountLogListener {
 
     private final EventBusListener<AccountEvent> accountEventEventBusListener;
 
-    public AccountLogListener(AccountReportRepository accountRepository) {
+    private final List<EventMigration> eventMigrations;
+
+    public AccountLogListener(AccountReportRepository accountRepository,
+            List<EventMigration> eventMigrations) {
         this.accountRepository = accountRepository;
-        accountEventEventBusListener = new EventBusListener<>();
+        this.eventMigrations = eventMigrations;
+        accountEventEventBusListener = new EventBusListener<>(this.eventMigrations);
         accountEventEventBusListener.registerHandler(AccountEvent.AccountCreated.class, this::onAccountCreated);
         accountEventEventBusListener.registerHandler(AccountEvent.AccountUpdated.class, this::onAccountUpdated);
         accountEventEventBusListener
