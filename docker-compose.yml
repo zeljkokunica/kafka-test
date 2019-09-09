@@ -1,0 +1,45 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    networks:
+      - kafka-test-net
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      - zookeeper
+    links:
+      - zookeeper
+    networks:
+      - kafka-test-net
+  pgaccounts:
+    image: postgres
+    tty: true
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: accounts
+    networks:
+      - kafka-test-net
+  pgreports:
+    image: postgres
+    tty: true
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: reports
+    networks:
+      - kafka-test-net
+
+networks:
+  kafka-test-net:
+    driver: bridge

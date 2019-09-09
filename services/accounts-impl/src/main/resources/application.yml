@@ -4,5 +4,11 @@ spring:
     consumer:
       group-id: accounts-service
       auto-offset-reset: earliest
+  datasource:
+    url: jdbc:postgresql://localhost:5434/accounts
+    username: postgres
+    password: postgres
+    continue-on-error: false
+
 server:
   port: 8081

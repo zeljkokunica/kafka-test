@@ -4,5 +4,10 @@ spring:
     consumer:
       group-id: reports-service
       auto-offset-reset: earliest
+  datasource:
+    url: jdbc:postgresql://localhost:5433/reports
+    username: postgres
+    password: postgres
+    continue-on-error: false
 server:
   port: 8083
